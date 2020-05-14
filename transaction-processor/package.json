@@ -1,0 +1,17 @@
+{
+  "name": "transaction-processor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "cbor": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "google-protobuf": "^3.11.4",
+    "lodash": "^4.17.15",
+    "protobufjs": "^6.8.8",
+    "sawtooth-sdk": "^1.0.5"
+  }
+}

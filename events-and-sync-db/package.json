@@ -1,0 +1,12 @@
+{
+  "name": "events-and-sync-db",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@deepstream/client": "^5.0.6",
+    "atob": "^2.1.2",
+    "pg": "^7.18.2",
+    "ws": "^7.2.1"
+  }
+}
