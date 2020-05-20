@@ -13,15 +13,15 @@ const { execShell, isDeviceExists } = require('../utils')
 exports.create_key = async (_, res) => {
   try {
     // generate unique id
-    const deviceId = nanoId()
+    // const deviceId = nanoId()
 
     // create private and public key secure
-    await execShell(
-      `docker exec sawtooth-shell-default sawtooth keygen ${deviceId}`,
-    )
+    // await execShell(
+    //   `docker exec sawtooth-shell-default sawtooth keygen ${deviceId}`,
+    // )
 
     // get address of devive on blockchain
-    const hexchain = new HexchainIOTClient(deviceId)
+    const hexchain = new HexchainIOTClient('lkrVxih3kTo2uVmGfi4vo')
 
     res.json({
       message: 'Successful',
@@ -91,7 +91,7 @@ exports.send_raw_data = async (req, res, next) => {
       limit: '1mb',
       encoding: contentType.parse(req).parameters.charset,
     },
-    function(err, string) {
+    function (err, string) {
       if (err) return res.send(err)
       let req_json = queryString.parse(string.toString())
       console.log(req_json)
