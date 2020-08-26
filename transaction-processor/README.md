@@ -2,6 +2,11 @@
 
 Môi trường
 
+## Required
+```
+sudo apt-get install build-essential -y
+```
+
 ```
 $ node -v
 v12.14.1

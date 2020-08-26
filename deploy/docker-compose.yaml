@@ -25,8 +25,12 @@ services:
   validator:
     image: hyperledger/sawtooth-validator:chime
     container_name: sawtooth-validator-default
+    depends_on:
+      - influxdb
     expose:
       - 4004
+    volumes: 
+      - ./sawtooth-validator/validator.toml:/etc/sawtooth/validator.toml
     ports:
       - '4004:4004'
     # start the validator with an empty genesis batch
@@ -57,10 +61,13 @@ services:
   rest-api:
     image: hyperledger/sawtooth-rest-api:chime
     container_name: sawtooth-rest-api-default
+    volumes: 
+      - ./sawtooth-rest-api/rest_api.toml:/etc/sawtooth/rest_api.toml
     ports:
       - '8008:8008'
     depends_on:
       - validator
+      - influxdb
     entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
 
   shell:
@@ -71,6 +78,30 @@ services:
     entrypoint: "bash -c \"\
       tail -f /dev/null \
       \""
+  
+  influxdb:
+    image: influxdb
+    container_name: sawtooth-stats-influxdb
+    ports:
+      - '8086:8086'
+    volumes: 
+      - influxdb:/var/lib/influxdb
+    environment:
+      INFLUXDB_DB: metrics
+      INFLUXDB_HTTP_AUTH_ENABLED: 'true'
+      INFLUXDB_ADMIN_USER: admin
+      INFLUXDB_ADMIN_PASSWORD: admin-pw
+      INFLUXDB_USER: lrdata
+      INFLUXDB_USER_PASSWORD: lrdata-pw
+
+  sawtooth-stats-grafana:
+    image: sawtooth-stats-grafana
+    depends_on:
+      - influxdb
+    container_name: sawtooth-stats-grafana
+    ports:
+      - '80:3000'
+
   # redis:
   #   image: redis:5-alpine
   #   container_name: redis
@@ -93,3 +124,6 @@ services:
   #   container_name: deepstream
   #   ports:
   #     - '6020:6020'
+
+volumes: 
+  influxdb:

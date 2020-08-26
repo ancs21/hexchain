@@ -14,6 +14,8 @@ docker-compose version 1.18.0, build 8dd22a9
 
 ```
 $ docker-compose up
+docker restart sawtooth-validator-default  
+docker restart sawtooth-stats-grafana
 ```
 
 ## Chạy lại nếu gặp lỗi
@@ -165,3 +167,8 @@ Nếu đợi lâu không thấy kết quả trả về thì server bị lỗi ch
 ```
 sudo chown -R $USER .sawtooth/keys
 ```
+
+```
+chmod 777 entrypoint.sh
+```
+
