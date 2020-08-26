@@ -95,7 +95,7 @@ services:
       INFLUXDB_USER_PASSWORD: lrdata-pw
 
   sawtooth-stats-grafana:
-    image: sawtooth-stats-grafana
+    image: docker.pkg.github.com/ancs21/hexchain/sawtooth-stats-grafana:v2
     depends_on:
       - influxdb
     container_name: sawtooth-stats-grafana
