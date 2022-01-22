@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
-    "nanoid": "^2.1.11",
+    "nanoid": "^3.1.31",
     "query-string": "^6.11.0",
     "raw-body": "^2.4.1",
     "request": "^2.88.2",
